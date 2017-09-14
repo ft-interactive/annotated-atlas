@@ -1,15 +1,15 @@
 #!/bin/bash
 
-rm -rvf build
-rm -rvf world
-rm -rvf us
-rm -rvf germany
+rm -rf build
+rm -rf world
+rm -rf us
+rm -rf germany
 
 mkdir -p build
 
 world_shp() {
   mkdir -p world
-  curl -z build/ne_$1_admin_0_countries.zip -o build/ne_$1_admin_0_countries.zip http://naciscdn.org/naturalearth/$1/cultural/ne_$1_admin_0_countries.zip
+  curl -Ss -z build/ne_$1_admin_0_countries.zip -o build/ne_$1_admin_0_countries.zip http://naciscdn.org/naturalearth/$1/cultural/ne_$1_admin_0_countries.zip
   unzip -od build build/ne_$1_admin_0_countries.zip
   chmod a-x build/ne_$1_admin_0_countries.*
 }
@@ -21,7 +21,7 @@ germany_shp() {
 
   # Gemeinde/"Commune"
   dir=vg250_0101.utm32s.shape.kompakt/vg250_kompakt
-  curl -o build/germany-gemeinde.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
+  curl -Ss -o build/germany-gemeinde.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
   unzip -ojd build build/germany-gemeinde.zip $dir/VG250_F.cpg $dir/VG250_F.dbf $dir/VG250_F.prj $dir/VG250_F.shp $dir/VG250_F.shx
   chmod a-x build/VG250_F.*
 
@@ -33,7 +33,7 @@ germany_shp() {
 
 us_shp() {
   mkdir -p us
-  curl -o build/cb_2015_us_county_5m.zip 'https://www2.census.gov/geo/tiger/GENZ2015/shp/cb_2015_us_county_5m.zip'
+  curl -Ss -o build/cb_2015_us_county_5m.zip 'https://www2.census.gov/geo/tiger/GENZ2015/shp/cb_2015_us_county_5m.zip'
   unzip -od build build/cb_2015_us_county_5m.zip cb_2015_us_county_5m.shp cb_2015_us_county_5m.dbf
   chmod a-x build/cb_2015_us_county_5m.*
 }
