@@ -23,7 +23,7 @@
     "url": "https://github.com/ft-interactive/annotated-atlas.git"
   },
   "scripts": {
-    "prepublish": "bash prepublish"
+    "prepublishOnly": "bash prepublish"
   },
   "devDependencies": {
     "d3-dsv": "^1.0.3",

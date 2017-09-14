@@ -1,8 +1,11 @@
 #!/bin/bash
 
+rm -rvf build
 rm -rvf world
 rm -rvf us
 rm -rvf germany
+
+mkdir -p build
 
 world_shp() {
   mkdir -p world
@@ -67,7 +70,7 @@ us() {
     > us/10m.json
 }
 
-# world 110m
-# world 50m
+world 110m
+world 50m
 us
-# germany
+germany
