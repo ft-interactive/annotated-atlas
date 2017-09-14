@@ -57,8 +57,8 @@ world() {
 germany() {
   germany_shp
 
-  # Gemeinde
-  geo2topo -q 1e5 -n regions=<( \
+  # gemeinde
+  geo2topo -q 1e5 -n gemeinde=<( \
     shp2json -n build/VG250_F.shp \
       | ndjson-filter '!/000$/.test(d.properties.RS)' \
       | ndjson-map '(d.id = d.properties.RS, d)') \
@@ -66,7 +66,7 @@ germany() {
   > germany/250m-gemeinde.json
 
   # Wahlkreise
-  geo2topo -q 1e5 -n regions=<( \
+  geo2topo -q 1e5 -n wahlkreise=<( \
     shp2json -n build/Geometrie_Wahlkreise_19DBT_VG250_geo.shp \
       | ndjson-filter '!/000$/.test(d.properties.WKR_NR)' \
       | ndjson-map '(d.id = d.properties.WKR_NR, d)') \
