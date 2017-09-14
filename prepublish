@@ -18,10 +18,17 @@ world_shp() {
 
 germany_shp() {
   mkdir -p germany
+
+  # Gemeinde/"Commune"
   dir=vg250_0101.utm32s.shape.kompakt/vg250_kompakt
-  curl -o build/vg250_utm32s.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
-  unzip -ojd build build/vg250_utm32s.zip $dir/VG250_F.cpg $dir/VG250_F.dbf $dir/VG250_F.prj $dir/VG250_F.shp $dir/VG250_F.shx
+  curl -o build/germany-gemeinde.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
+  unzip -ojd build build/germany-gemeinde.zip $dir/VG250_F.cpg $dir/VG250_F.dbf $dir/VG250_F.prj $dir/VG250_F.shp $dir/VG250_F.shx
   chmod a-x build/VG250_F.*
+
+  # Wahlkreise/"Constituency"
+  curl -sS -o build/germany-wahlkreise.zip https://www.bundeswahlleiter.de/dam/jcr/8d901750-eee7-411e-8a95-90268e9d35b4/btw17_geometrie_wahlkreise_vg250_geo_shp.zip
+  unzip -ojd build build/germany-wahlkreise.zip
+  chmod a-x build/Geometrie_Wahlkreise_19DBT_VG250_geo.*
 }
 
 us_shp() {
@@ -49,12 +56,22 @@ world() {
 
 germany() {
   germany_shp
+
+  # Gemeinde
   geo2topo -q 1e5 -n regions=<( \
     shp2json -n build/VG250_F.shp \
       | ndjson-filter '!/000$/.test(d.properties.RS)' \
       | ndjson-map '(d.id = d.properties.RS, d)') \
     | toposimplify -f -p 0.25 \
-  > germany/250m--regions.json
+  > germany/250m-gemeinde.json
+
+  # Wahlkreise
+  geo2topo -q 1e5 -n regions=<( \
+    shp2json -n build/Geometrie_Wahlkreise_19DBT_VG250_geo.shp \
+      | ndjson-filter '!/000$/.test(d.properties.WKR_NR)' \
+      | ndjson-map '(d.id = d.properties.WKR_NR, d)') \
+    | toposimplify -f -p 0.25 \
+  > germany/250m-wahlkreise.json
 }
 
 us() {
