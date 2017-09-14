@@ -15,10 +15,10 @@ world_shp() {
 
 germany_shp() {
   mkdir -p germany
-  # dir=vg250_0101.utm32s.shape.kompakt/vg250_kompakt
-  # curl -o build/vg250_utm32s.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
-  # unzip -ojd build build/vg250_utm32s.zip $dir/VG250_F.cpg $dir/VG250_F.dbf $dir/VG250_F.prj $dir/VG250_F.shp $dir/VG250_F.shx
-  # chmod a-x build/VG250_F.*
+  dir=vg250_0101.utm32s.shape.kompakt/vg250_kompakt
+  curl -o build/vg250_utm32s.zip http://sg.geodatenzentrum.de/web_download/vg/vg250_0101/utm32s/shape/vg250_0101.utm32s.shape.kompakt.zip
+  unzip -ojd build build/vg250_utm32s.zip $dir/VG250_F.cpg $dir/VG250_F.dbf $dir/VG250_F.prj $dir/VG250_F.shp $dir/VG250_F.shx
+  chmod a-x build/VG250_F.*
 }
 
 us_shp() {
