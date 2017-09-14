@@ -10,7 +10,7 @@ test:
 deployment:
   release:
     tag: /v.*/
-    owner: Financial-Times
+    owner: ft-interactive
     commands:
       - npm-prepublish --verbose
       - npm publish --access public

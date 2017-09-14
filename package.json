@@ -1,5 +1,5 @@
 {
-  "name": "world-atlas",
+  "name": "@financial-times/annotated-atlas",
   "version": "0.0.0",
   "description": "Pre-built TopoJSON with additional properties",
   "license": "BSD-3-Clause",
