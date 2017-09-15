@@ -86,7 +86,7 @@ us() {
     > us/10m.json
 }
 
-# world 110m
-# world 50m
-# us
+world 110m
+world 50m
+us
 germany
