@@ -70,7 +70,6 @@ germany() {
     shp2json -n build/Geometrie_Wahlkreise_19DBT_VG250_geo.shp \
       | ndjson-filter '!/000$/.test(d.properties.WKR_NR)' \
       | ndjson-map '(d.id = d.properties.WKR_NR, d)') \
-    | toposimplify -f -p 0.25 \
   > germany/250m-wahlkreise.json
 }
 
@@ -87,7 +86,7 @@ us() {
     > us/10m.json
 }
 
-world 110m
-world 50m
-us
+# world 110m
+# world 50m
+# us
 germany
